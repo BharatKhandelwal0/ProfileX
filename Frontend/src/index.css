@@ -4,3 +4,7 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+.hero::-webkit-scrollbar {
+  display: none; 
+}
