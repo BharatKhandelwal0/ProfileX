@@ -1,13 +1,43 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 const Register = () => {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = async(e)=>{
+    e.preventDefault()
+
+    const userData ={
+      name : name,
+      email: email,
+      password: password
+    }
+    const result = await registerUser(userData)
+    console.log(result);
+    
+  }
+
+  const registerUser= async(userData)=>{
+    const res = await fetch('http://localhost:1100/user/register',{
+      method:'POST',
+      headers:{
+        'Content-Type':"application/json"
+      },
+      body:JSON.stringify(userData)
+    })
+    return res.json()
+  }
+
+
   return (
     <div className='h-[50%] w-[50%] bg-white  text-black text-3xl font-bold flex flex-col items-center justify-center rounded-md shadow-lg'>
         <h1 className='mb-10 text-5xl '>Register</h1>
-      <form className='flex flex-col gap-4 w-[70%]'>
-        <input type="text" placeholder='Name' name='name' className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
-        <input type="email" placeholder='Email' name='email' className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
-        <input type="password" placeholder='Password' name='password' className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-[70%]'>
+        <input type="text" placeholder='Name' name='name' value={name} onChange={(e)=>setName(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
+        <input type="email" placeholder='Email' name='email' value={email} onChange={(e)=>setEmail(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
+        <input type="password" placeholder='Password' name='password' value={password} onChange={(e)=>setPassword(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
         <button type='submit' className='bg-linear-to-r from-purple-700 to-blue-600 cursor-pointer text-white font-bold py-2 px-4 rounded-md'>Register</button>
       </form>
       <div className='text-black mt-7 text-xl'>Don't have an account? <Link to='/login'><span className='underline text-blue-800  hover:text-blue-900'>Login</span></Link></div>

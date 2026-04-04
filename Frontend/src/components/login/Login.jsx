@@ -15,7 +15,9 @@ const Login = () => {
       password: password
     }
 
-    await registerUser(userData)
+    const result = await registerUser(userData)
+    console.log(result);
+    
   }
 
   const registerUser = async (userData)=>{
@@ -36,11 +38,11 @@ const Login = () => {
 
       <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-[70%]'>
 
-        <input type="text" placeholder='Name' name='name' value={name} onChange={(e)=>setName(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
+        <input type="text" placeholder='Name' name='name' value={name} onChange={(e)=>setName(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-900'/>
 
-        <input type="email" placeholder='Email' name='email' value={email} onChange={(e)=>setEmail(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
+        <input type="email" placeholder='Email' name='email' value={email} onChange={(e)=>setEmail(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-900'/>
 
-        <input type="password" placeholder='Password' name='password' value={password} onChange={(e)=>setPassword(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
+        <input type="password" placeholder='Password' name='password' value={password} onChange={(e)=>setPassword(e.target.value)} className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-900'/>
 
         <button type='submit' className='bg-linear-to-r from-purple-700 to-blue-600 cursor-pointer text-white font-bold py-2 px-4 rounded-md'>Login</button>
 
