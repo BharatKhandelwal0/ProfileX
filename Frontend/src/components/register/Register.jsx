@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Register = () => {
   return (
     <div className='h-[50%] w-[50%] bg-white  text-black text-3xl font-bold flex flex-col items-center justify-center rounded-md shadow-lg'>
@@ -8,7 +10,7 @@ const Register = () => {
         <input type="password" placeholder='Password' name='password' className='p-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-600'/>
         <button type='submit' className='bg-linear-to-r from-purple-700 to-blue-600 cursor-pointer text-white font-bold py-2 px-4 rounded-md'>Register</button>
       </form>
-      <a href="/login" className='text-black mt-7 text-xl'>Don't have an account? <span className='underline text-blue-800  hover:text-blue-900'>Login</span></a>
+      <div className='text-black mt-7 text-xl'>Don't have an account? <Link to='/login'><span className='underline text-blue-800  hover:text-blue-900'>Login</span></Link></div>
     </div>
   )
 }
