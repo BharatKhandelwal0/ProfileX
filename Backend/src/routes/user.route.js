@@ -5,6 +5,7 @@ import { userRegister } from '../controllers/userRegister.js'
 import { authMiddleware } from '../controllers/authMiddleware.js'
 import { infomation } from '../controllers/user.info.js'
 import { forgetPassword, verfiyOtp } from '../controllers/forgetPassword.js'
+import { updatePassword } from '../controllers/updatePassword.js'
 const Router = express.Router()
 
 Router.post('/register',userRegister)
@@ -13,5 +14,6 @@ Router.post('/info',authMiddleware,infomation)
 Router.get('/dashboard',authMiddleware,dashboard)
 Router.post('/forget-password',forgetPassword)
 Router.post('/verify-otp',verfiyOtp)
+Router.post('/update-password',updatePassword)
 
 export default Router 
