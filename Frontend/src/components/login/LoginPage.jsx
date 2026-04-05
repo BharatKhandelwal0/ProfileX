@@ -102,12 +102,14 @@ export default function LoginPage() {
                 <label className="text-white/70 text-xs font-medium tracking-wide uppercase">
                   Password
                 </label>
+                <Link to='/forget-password'>
                 <button
                   type="button"
                   className="text-xs text-white/50 hover:text-white transition-colors duration-150"
                 >
                   Forgot password?
                 </button>
+                </Link>
               </div>
               <div className="relative">
                 <input

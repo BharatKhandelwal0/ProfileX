@@ -3,6 +3,7 @@ import Main from './components/profile/Main.jsx'
 import Home from './components/home/Home.jsx'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import RegisterPage from './components/register/RegisterPage.jsx'
+import ForgetPassword from './components/login/ForgotPasswordPage.jsx'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/login' element={<LoginPage/>} />
+          <Route path='/forget-password' element={<ForgetPassword/>}/>
           <Route path='/profile' element={<Main/>} />
           <Route path='/register' element={<RegisterPage/>} />
         </Routes>
