@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Eye,EyeOff } from 'lucide-react'
+import {Link} from 'react-router-dom'
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -312,12 +313,14 @@ export default function RegisterPage() {
           {/* Sign In link */}
           <p className="text-center text-sm text-white/50">
             Already have an account?{" "}
+            <Link to='/login'>
             <button
               type="button"
               className="text-white font-medium hover:underline underline-offset-2 transition-all duration-150"
             >
               Sign in
             </button>
+            </Link>
           </p>
         </div>
 

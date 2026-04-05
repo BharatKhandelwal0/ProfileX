@@ -1,5 +1,7 @@
 import { useState } from "react";
 import thanos from "../../assets/thanos.jpeg";
+import {Link} from 'react-router-dom'
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -176,12 +178,14 @@ export default function LoginPage() {
           {/* Create account */}
           <p className="text-center text-sm text-white/50">
             Don't have an account?{" "}
+            <Link to='/register'>
             <button
               type="button"
               className="text-white font-medium hover:underline underline-offset-2 transition-all duration-150"
             >
               Create one
             </button>
+            </Link>
           </p>
         </div>
 
