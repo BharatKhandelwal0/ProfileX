@@ -20,28 +20,30 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
-    e.preventDefault();
-
-    console.log(formData);
-    const { name, email, password } = formData;
-    const res = await fetch("http://localhost:1100/user/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password }),
-    });
-
-    const data = await res.json();
-    console.log(data);
-
-    if(res.ok){
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      // alert("Login successful!");
-      navigate("/profile");
-    } else {
-      alert("Login failed!");
+    try {
+      e.preventDefault();
+      const { name, email, password } = formData;
+      const res = await fetch("http://localhost:1100/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+  
+      const data = await res.json();
+      console.log(data);
+  
+      if(res.ok){
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        // alert("Login successful!");
+        navigate("/profile");
+      } else {
+        alert("Login failed!");
+      }
+    } catch (error) {
+      console.error("Error during login:", error.message);
     }
   };
 

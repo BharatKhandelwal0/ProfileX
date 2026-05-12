@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -16,13 +16,34 @@ const SignupPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  const handleSubmit = (e) => {
+   const navigate = useNavigate();
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     console.log(formData);
 
-    // backend signup logic here
+    const {firstName, lastName, email, password} = formData;
+
+    if (!firstName || !lastName || !email || !password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    const res = await fetch("http://localhost:1100/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstName, lastName, email, password }),
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
+      navigate("/login");
+    } else {
+      alert("Signup failed!");
+    }
   };
 
   return (
