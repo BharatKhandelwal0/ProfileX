@@ -8,7 +8,7 @@ import EnterOtp from './components/login/EnterOtp.jsx'
 
 const App = () => {
   return (
-    <div className='h-screen w-screen bg-linear-to-r from-black to-slate-900 text-white text-3xl font-bold flex items-center justify-center'>
+    <div className='w-full bg-linear-to-r from-black to-slate-900 text-white text-3xl font-bold flex items-center justify-center'>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>} />

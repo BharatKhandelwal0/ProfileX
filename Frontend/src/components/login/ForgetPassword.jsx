@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+// import drops from "../../assets/daredevil.jpeg"
+import drops from "../../assets/clouds.jpeg"
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
@@ -42,7 +44,7 @@ const ForgetPassword = () => {
   return (
     <div className="min-h-screen w-screen flex items-center justify-center bg-linear-to-br from-black via-slate-900 to-slate-800 px-4">
 
-      <img className="absolute inset-0 w-full h-full object-cover" src="https://ea-unboxed-assets.croma.com/cromaunboxed-as/2026/02/Daredevil-Born-Again-Season-2-expected-episode-release-dates-time-jump-explained.png"/>
+      <img className="absolute inset-0 w-full h-full object-cover" src={drops} />
       <div className="w-full max-w-md bg-white/10 backdrop-blur-md shadow-lg rounded-2xl p-8 " style={{
             background: "rgba(255,255,255,0.07)",
             backdropFilter: "blur(24px)",

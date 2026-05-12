@@ -1,13 +1,20 @@
-import { Link } from "react-router-dom"
-import HomeHead from "./HomeHead"
+import React from 'react'
+import Navbar from './Navbar.jsx'
+import Hero from './Hero.jsx'
+import About from './About.jsx'
+import Products from './Products.jsx'
+import CTA from './CTA.jsx'
+import Footer from './Footer.jsx'
 
 const Home = () => {
   return (
-    <div className="h-full w-full bg-[url(https://static.dc.com/dc/files/default_images/Movies-Gallery_TheBatman_TBM-10163_61e89f6fc2c947.10565522.jpg?w=1200)]">
-      <HomeHead/>
-      <div className="flex justify-center items-center h-[90%] w-full ">
-        <Link to='/login'><button className='cursor-pointer bg-amber-600 px-10 py-4 rounded-2xl flex text-8xl justify-center items-center'>login </button></Link>
-      </div>
+    <div className='w-screen min-h-screen  bg-linear-to-br from-black via-slate-950 to-purple-950 text-white'>
+      <Navbar />
+      <Hero />
+      <About /> 
+      <Products />
+      <CTA /> 
+      <Footer />
     </div>
   )
 }
