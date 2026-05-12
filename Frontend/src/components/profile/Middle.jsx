@@ -1,17 +1,52 @@
 const Middle = () => {
   return (
-    <div className='h-[50%] w-full  text-white text-3xl font-bold flex items-start  rounded-t-md p-4 gap-5'>
-        <div className="h-full w-[50%]">
-            <h1 className='h-[20%] text-4xl font-semibold bg-slate-900 p-3 rounded'>About</h1>
-            <p className=' hero h-[80%] w-full text-lg font-normal p-3 overflow-y-auto border-3 border-slate-900'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellendus ea quidem aut molestias? Deleniti cumque possimus adipisci veritatis quasi, sequi placeat molestiae, delectus neque similique nihil. Ex, ratione fugiat sit doloribus placeat enim omnis numquam. Accusamus voluptas iste quibusdam temporibus ad eligendi, veniam, iure laudantium impedit ducimus eum cumque in necessitatibus nostrum voluptate deleniti minima distinctio beatae, soluta nihil. Et laboriosam incidunt, quod velit excepturi provident quas aliquid facere temporibus atque corrupti nesciunt! Assumenda amet accusamus quibusdam perspiciatis quod voluptatibus rem tempora repudiandae praesentium dolore officiis adipisci, provident voluptas ab corporis eos quidem aperiam ad minima obcaecati atque. Sit.</p>
+    <div className='grid grid-cols-1 cursor-default lg:grid-cols-2 gap-6 p-6 md:p-10'>
+
+      {/* About */}
+      <div className='bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-lg'>
+        <h1 className='text-2xl md:text-3xl font-bold mb-5'>
+          About
+        </h1>
+
+        <p className='text-slate-300 leading-8 text-sm md:text-base'>
+          I am a passionate software developer with strong interest in backend
+          systems, scalable APIs, modern UI development, and problem solving.
+          I enjoy building clean and efficient applications using technologies
+          like React, Node.js, Express, MongoDB, and Tailwind CSS.
+        </p>
+      </div>
+
+      {/* Skills */}
+      <div className='bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-lg'>
+        <h1 className='text-2xl md:text-3xl font-bold mb-5'>
+          Skills
+        </h1>
+
+        <div className='flex flex-wrap gap-3'>
+          {[
+            "React",
+            "Node.js",
+            "Express",
+            "MongoDB",
+            "Tailwind CSS",
+            "JavaScript",
+            "Next.js",
+            "MySQL",
+            "Git",
+            "C++"
+          ].map((skill, index) => (
+            <span
+              key={index}
+              className='px-4 py-2 rounded-full bg-purple-700/20 border border-purple-500 text-sm'
+            >
+              {skill}
+            </span>
+          ))}
         </div>
-        <div className="h-full w-[50%]">
-            <h1 className='h-[20%] text-4xl font-semibold bg-slate-900 p-3 rounded'>Skills</h1>
-            <p className=' hero h-[80%] w-full text-lg font-normal p-3 overflow-y-auto border-3 border-slate-900'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit repellendus ea quidem aut molestias? Deleniti cumque possimus adipisci veritatis quasi, sequi placeat molestiae, delectus neque similique nihil. Ex, ratione fugiat sit doloribus placeat enim omnis numquam. Accusamus voluptas iste quibusdam temporibus ad eligendi, veniam, iure laudantium impedit ducimus eum cumque in necessitatibus nostrum voluptate deleniti minima distinctio beatae, soluta nihil. Et laboriosam incidunt, quod velit excepturi provident quas aliquid facere temporibus atque corrupti nesciunt! Assumenda amet accusamus quibusdam perspiciatis quod voluptatibus rem tempora repudiandae praesentium dolore officiis adipisci, provident voluptas ab corporis eos quidem aperiam ad minima obcaecati atque. Sit.</p>
-        </div>
-      
+      </div>
+
     </div>
   )
-}   
+}
 
 export default Middle
