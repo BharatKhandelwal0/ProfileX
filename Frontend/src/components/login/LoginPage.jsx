@@ -1,28 +1,48 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
-
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     console.log(formData);
+    const { name, email, password } = formData;
+    const res = await fetch("http://localhost:1100/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-    // backend login logic here
+    const data = await res.json();
+    console.log(data);
+
+    if(res.ok){
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      // alert("Login successful!");
+      navigate("/profile");
+    } else {
+      alert("Login failed!");
+    }
   };
 
   return (
@@ -41,6 +61,21 @@ const LoginPage = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block mb-2 text-sm font-medium">
+              Name
+            </label>
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full border text-lg border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
           
           {/* Email */}
           <div>
