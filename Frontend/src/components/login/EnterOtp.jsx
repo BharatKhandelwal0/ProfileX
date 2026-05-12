@@ -1,17 +1,54 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const OtpVerification = () => {
   const [otp, setOtp] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email || ""
+  // const genOtp = location.state?.otp || ""
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log("Entered OTP:", otp);
-
+  const handleSubmit = async(e) => {
+    try {
+      e.preventDefault();
+  
+      const res = await fetch("http://localhost:1100/user/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email, otp: otp })
+      });
+      const data = await res.json()
+      console.log(data);
+  
+      if(res.ok){
+        navigate('/profile')
+      }else{
+        alert("Invalid OTP. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+      alert("An error occurred. Please try again.");
+    }
   };
+  const handleResend = async(e) => {
+    e.preventDefault();
+    const res = await fetch("http://localhost:1100/user/forget-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: email }) 
+    });
+    const data = await res.json()
+    alert(`OTP :- ${data?.OTP || "Not received"}`)
+    console.log(data);
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-500 via-indigo-500 to-purple-600 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-black via-slate-900 to-slate-800 px-4">
 
       <img className="absolute inset-0 w-full h-full object-cover" src="https://ea-unboxed-assets.croma.com/cromaunboxed-as/2026/02/Daredevil-Born-Again-Season-2-expected-episode-release-dates-time-jump-explained.png"/>
       <div className="w-full max-w-md bg-white/10 backdrop-blur-md shadow-lg rounded-2xl p-8 " style={{
@@ -41,10 +78,10 @@ const OtpVerification = () => {
             <input
               type="text"
               name="otp"
-              placeholder="Enter 6-digit OTP"
+              placeholder="Enter 4-digit OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              maxLength={6}
+              maxLength={4}
               required
               className="w-full bg-white/30 border border-white/30 rounded-lg px-4 py-3 tracking-widest text-center text-lg font-semibold outline-none focus:ring-1"
             />
@@ -63,7 +100,7 @@ const OtpVerification = () => {
         {/* Resend OTP */}
         <p className="text-sm text-center text-white/70 mt-6">
           Didn’t receive OTP?{" "}
-          <span className="text-white font-medium cursor-pointer hover:underline">
+          <span onClick={handleResend} className="text-blue-700 font-medium cursor-pointer hover:underline">
             Resend
           </span>
         </p>

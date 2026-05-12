@@ -9,7 +9,7 @@ export const login = async(req,res)=>{
         if(!exists){
             return res.status(400).json({message:`${email} , This email is not registered`})
         }
-        const comaparePassword = bcrypt.compare(password, exists.password)
+        const comaparePassword = await bcrypt.compare(password, exists.password)
         if(!comaparePassword){
             return res.status(400).json({message:`incorrect Pasword`})
         }

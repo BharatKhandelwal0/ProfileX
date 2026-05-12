@@ -10,7 +10,7 @@ export const forgetPassword =async (req,res)=>{
             return res.status(400).json({message:"Wrong Email ID"})
         }
 
-        const otp = crypto.randomInt(1000,10000)
+        const otp = await crypto.randomInt(1000,10000)
         const hashedOtp = await bcrypt.hash(otp.toString(),5)
         if(!hashedOtp){
             return res.status(500).json({message: "OTP Not generated"})
@@ -32,7 +32,7 @@ export const verfiyOtp = async (req,res)=>{
         if(!user){
             return res.status(400).json({message:"Wrong Email ID"})
         }
-        const compareOtp = await bcrypt.compare(otp,user.otp)
+        const compareOtp = await bcrypt.compare(otp.toString(),user.otp)
         if(!compareOtp){
             return res.status(400).json({message:"Invalid OTP"})
         }

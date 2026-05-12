@@ -20,8 +20,6 @@ const SignupPage = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-    console.log(formData);
-
     const {firstName, lastName, email, password} = formData;
 
     if (!firstName || !lastName || !email || !password) {
@@ -47,7 +45,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="relative object-cover min-h-screen w-screen flex items-center justify-center bg-gray-500 px-4">
+    <div className="relative object-cover min-h-screen w-screen flex items-center justify-center bg-linear-to-br from-black via-slate-900 to-slate-800 px-4">
       <img className="absolute inset-0 w-full h-full object-cover" src="https://ea-unboxed-assets.croma.com/cromaunboxed-as/2026/02/Daredevil-Born-Again-Season-2-expected-episode-release-dates-time-jump-explained.png"/>
       <div className="w-full max-w-md bg-white/10 backdrop-blur-md shadow-lg rounded-2xl p-8 " style={{
             background: "rgba(255,255,255,0.07)",

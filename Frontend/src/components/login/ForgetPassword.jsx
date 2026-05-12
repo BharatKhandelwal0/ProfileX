@@ -6,15 +6,41 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log("Send OTP to:", email);
-    navigate("/enterOtp");
+  const handleSubmit = async(e) => {
+    try {
+      e.preventDefault();
+  
+      const res = await fetch("http://localhost:1100/user/forget-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
+      
+      const data = await res.json()
+      alert(`OTP :- ${data?.OTP || "Not received"}`)
+      console.log(data);
+  
+      if(res.ok){
+        navigate("/enterOtp",{
+          state: {
+            email: email,
+            otp: data?.OTP || "Not received"
+          }
+        });
+      }
+      else{
+        alert("Error sending OTP. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 px-4">
+    <div className="min-h-screen w-screen flex items-center justify-center bg-linear-to-br from-black via-slate-900 to-slate-800 px-4">
 
       <img className="absolute inset-0 w-full h-full object-cover" src="https://ea-unboxed-assets.croma.com/cromaunboxed-as/2026/02/Daredevil-Born-Again-Season-2-expected-episode-release-dates-time-jump-explained.png"/>
       <div className="w-full max-w-md bg-white/10 backdrop-blur-md shadow-lg rounded-2xl p-8 " style={{
