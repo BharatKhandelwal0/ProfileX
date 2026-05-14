@@ -11,6 +11,11 @@ const ForgetPassword = () => {
   const handleSubmit = async(e) => {
     try {
       e.preventDefault();
+
+      if(!email || !email.endsWith("@gmail.com")){
+        alert("Please Enter Your Email")
+        return;
+      }
   
       const res = await fetch("http://localhost:1100/user/forget-password", {
         method: "POST",
@@ -21,14 +26,20 @@ const ForgetPassword = () => {
       });
       
       const data = await res.json()
-      alert(`OTP :- ${data?.OTP || "Not received"}`)
       console.log(data);
+      
+      if(!res.ok){
+        alert(`Error sending OTP. Please try again.`);
+        return;
+      }
+
+      alert(`OTP :- ${data?.OTP}`)
   
       if(res.ok){
         navigate("/enterOtp",{
           state: {
             email: email,
-            otp: data?.OTP || "Not received"
+            otp: data?.OTP
           }
         });
       }

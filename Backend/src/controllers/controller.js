@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 
 export const login = async(req,res)=>{
     try{
-        const {name,email,password} = req.body
+        const {email,password} = req.body
         const exists = await User.findOne({email})
         if(!exists){
             return res.status(400).json({message:`${email} , This email is not registered`})
@@ -24,7 +24,7 @@ export const login = async(req,res)=>{
             {$push:{"refreshTokens":{"token":refreshToken}}},
             {returnDocument:"after"}
         )
-        res.status(200).json({message:`${name} has logined Successfully`})
+        res.status(200).json({message:`${exists.firstName} has logined Successfully`})
     }catch(error){
         res.status(500).json({error:error.message})
     }

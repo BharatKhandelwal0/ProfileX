@@ -3,16 +3,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import batman from "../../assets/Batman.jpeg"
-// import space from "../../assets/space.jpeg"
-// import astronomy from "../../assets/astronomy.jpeg"
+import {Eye , EyeOff} from 'lucide-react'
 
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false)
   
   const handleChange = (e) => {
     setFormData({
@@ -25,13 +24,13 @@ const LoginPage = () => {
   const handleSubmit = async(e) => {
     try {
       e.preventDefault();
-      const { name, email, password } = formData;
+      const { email, password } = formData;
       const res = await fetch("http://localhost:1100/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({email, password }),
       });
   
       const data = await res.json();
@@ -65,23 +64,7 @@ const LoginPage = () => {
           Login
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block mb-2 text-sm font-medium">
-              Name
-            </label>
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full border text-lg border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
-          
+        <form onSubmit={handleSubmit} className="space-y-5">          
           {/* Email */}
           <div>
             <label className="block mb-2 text-sm font-medium">
@@ -100,13 +83,13 @@ const LoginPage = () => {
           </div>
 
           {/* Password */}
-          <div>
+          <div className="relative">
             <label className="block mb-2 text-sm font-medium">
               Password
             </label>
 
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Enter your password"
               value={formData.password}
@@ -114,6 +97,9 @@ const LoginPage = () => {
               required
               className="w-full border text-lg border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-1 focus:ring-blue-500"
             />
+            <button type="button" onClick={()=>{setShowPassword(!showPassword)}} className="p-1 absolute right-2 top-6 translate-y-1/2 transition duration-300 cursor-pointer">
+              {showPassword ? <Eye size={18} /> : <EyeOff size={18}/>  }
+            </button>
           </div>
           <div className="text-sm text-right text-gray-500">
             <Link to="/forget-password" className="text-blue-600 cursor-pointer hover:underline">

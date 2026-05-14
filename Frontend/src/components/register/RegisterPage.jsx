@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-// import spiderman from "../../assets/spiderman.jpg"
 import stone from "../../assets/volcano.jpeg"
+import {Eye, EyeOff} from 'lucide-react'
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ const SignupPage = () => {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleChange = (e) => {
     setFormData({
@@ -115,13 +116,13 @@ const SignupPage = () => {
           </div>
 
           {/* Password */}
-          <div>
+          <div className="relative">
             <label className="block mb-2 text-sm font-medium">
               Password
             </label>
 
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Enter your password"
               value={formData.password}
@@ -129,6 +130,9 @@ const SignupPage = () => {
               required
               className="w-full border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
             />
+            <button type="button" onClick={()=>{setShowPassword(!showPassword)}} className="absolute p-1 top-6 right-2 translate-y-1/2 cursor-pointer transition duration-300">
+              {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+            </button>
           </div>
 
           {/* Button */}
