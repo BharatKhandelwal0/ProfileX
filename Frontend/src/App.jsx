@@ -7,6 +7,8 @@ import ForgetPassword from './components/login/ForgetPassword.jsx'
 import EnterOtp from './components/login/EnterOtp.jsx'
 import ProtectedRoute from './components/verification/ProtectedRoute.jsx'
 import UpdatePassword from './components/login/UpdatePassword.jsx'
+import Info from './components/register/Info.jsx'
+import RegInfo from './components/register/RegInfo.jsx'
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
           <Route path='/register' element={<RegisterPage/>} />
           <Route path='/profile' element={<Main/>} />
           <Route path='/update-password' element={<UpdatePassword/>} />
+          <Route path='/info' element={<Info/>} />
+          <Route path='/reginfo' element={<RegInfo/>} />
         </Routes>
       </BrowserRouter>
     </div>

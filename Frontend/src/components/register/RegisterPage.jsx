@@ -48,8 +48,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="relative object-cover min-h-screen w-screen flex items-center justify-center bg-linear-to-br from-black via-slate-900 to-slate-800 px-4">
-      <img className="absolute inset-0 w-full h-full object-cover" src={stone} />
+    <div>
       <div className="w-full max-w-md bg-white/10 backdrop-blur-md shadow-lg rounded-2xl p-8 " style={{
             background: "rgba(255,255,255,0.07)",
             backdropFilter: "blur(24px)",
@@ -77,7 +76,7 @@ const SignupPage = () => {
               value={formData.firstName}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
             />
           </div>
 
@@ -94,7 +93,7 @@ const SignupPage = () => {
               value={formData.lastName}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
             />
           </div>
 
@@ -111,7 +110,7 @@ const SignupPage = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
             />
           </div>
 
@@ -128,7 +127,7 @@ const SignupPage = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
             />
             <button type="button" onClick={()=>{setShowPassword(!showPassword)}} className="absolute p-1 top-6 right-2 translate-y-1/2 cursor-pointer transition duration-300">
               {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}

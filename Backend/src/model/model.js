@@ -51,7 +51,7 @@ const dbSchema = new mongoose.Schema({
             type:String,
             trim:true,
         },
-        desc:{
+        bio:{
             type:String,
             trim:true
         },
@@ -61,7 +61,7 @@ const dbSchema = new mongoose.Schema({
             capitalize:true,
 
         }],
-        bio:{
+        about:{
             type:String,
             trim:true,
         },
