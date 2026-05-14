@@ -25,7 +25,11 @@ const OtpVerification = () => {
       console.log(data);
   
       if(res.ok){
-        navigate('/profile')
+        navigate('/update-password',{
+          state: {
+            email: email
+          }
+        })
       }else{
         alert("Invalid OTP. Please try again.");
       }

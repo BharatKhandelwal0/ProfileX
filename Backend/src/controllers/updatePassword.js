@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt'
 
 export const updatePassword = async(req,res)=>{
     try {
-        const {email, oldPassword, newPassword} = req.body
+        const {email, newPassword} = req.body
 
-        if(!email || !oldPassword || !newPassword){
+        if(!email || !newPassword){
             return res.status(400).json({message:"All Fields Are Required"})
         }
     
@@ -17,15 +17,15 @@ export const updatePassword = async(req,res)=>{
             return res.status(400).json({message:"password Must Be greater than 7"})
         }
 
-        const isMatch = await bcrypt.compare(oldPassword,user.password)
-        if(!isMatch){
-            return res.status(401).json({message:"entered Wrong Old Password"})
-        }
+        // const isMatch = await bcrypt.compare(newPassword,user.password)
+        // if(!isMatch){
+        //     return res.status(401).json({message:"entered Wrong Old Password"})
+        // }
 
-        const isSame = await bcrypt.compare(newPassword,user.password)
-        if(isSame){
-            return res.status(400).json({message:"New password must be different from old password"})
-        }
+        // const isSame = await bcrypt.compare(newPassword,user.password)
+        // if(isSame){
+        //     return res.status(400).json({message:"New password must be different from old password"})
+        // }
 
         const hashedPassword = await bcrypt.hash(newPassword , 10)
 

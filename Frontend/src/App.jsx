@@ -6,6 +6,7 @@ import RegisterPage from './components/register/RegisterPage.jsx'
 import ForgetPassword from './components/login/ForgetPassword.jsx'
 import EnterOtp from './components/login/EnterOtp.jsx'
 import ProtectedRoute from './components/verification/ProtectedRoute.jsx'
+import UpdatePassword from './components/login/UpdatePassword.jsx'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             } />
           <Route path='/register' element={<RegisterPage/>} />
           <Route path='/profile' element={<Main/>} />
+          <Route path='/update-password' element={<UpdatePassword/>} />
         </Routes>
       </BrowserRouter>
     </div>
