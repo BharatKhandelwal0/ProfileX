@@ -6,6 +6,7 @@ import { authMiddleware } from '../controllers/authMiddleware.js'
 import { infomation } from '../controllers/user.info.js'
 import { forgetPassword, verfiyOtp } from '../controllers/forgetPassword.js'
 import { updatePassword } from '../controllers/updatePassword.js'
+import {check} from '../controllers/user.check.js'
 const Router = express.Router()
 
 Router.post('/register',userRegister)
@@ -15,5 +16,6 @@ Router.get('/dashboard',authMiddleware,dashboard)
 Router.post('/forget-password',forgetPassword)
 Router.post('/verify-otp',verfiyOtp)
 Router.post('/update-password',updatePassword)
+Router.get('/auth/check',authMiddleware,check)
 
 export default Router 

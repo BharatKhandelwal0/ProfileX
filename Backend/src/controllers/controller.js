@@ -24,6 +24,21 @@ export const login = async(req,res)=>{
             {$push:{"refreshTokens":{"token":refreshToken}}},
             {returnDocument:"after"}
         )
+
+        await res.cookie("AccessToken", accessToken,{
+            httpOnly:true,
+            sameSite:"lax",
+            secure:false,
+            maxAge: 10 * 60 * 1000
+        })
+
+        await res.cookie("RefreshToken", refreshToken,{
+            httpOnly:true,
+            sameSite:"lax",
+            secure:false,
+            maxAge: 10 * 60 * 1000
+        })
+
         res.status(200).json({message:`${exists.firstName} has logined Successfully`})
     }catch(error){
         res.status(500).json({error:error.message})

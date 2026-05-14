@@ -27,6 +27,7 @@ const LoginPage = () => {
       const { email, password } = formData;
       const res = await fetch("http://localhost:1100/user/login", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -37,9 +38,6 @@ const LoginPage = () => {
       console.log(data);
   
       if(res.ok){
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        // alert("Login successful!");
         navigate("/profile");
       } else {
         alert("Login failed!");

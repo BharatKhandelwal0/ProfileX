@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import RegisterPage from './components/register/RegisterPage.jsx'
 import ForgetPassword from './components/login/ForgetPassword.jsx'
 import EnterOtp from './components/login/EnterOtp.jsx'
+import ProtectedRoute from './components/verification/ProtectedRoute.jsx'
 
 const App = () => {
   return (
@@ -15,7 +16,11 @@ const App = () => {
           <Route path='/login' element={<LoginPage/>} />
           <Route path='/forget-password' element={<ForgetPassword/>}/>
           <Route path='/enterOtp' element={<EnterOtp/>}/>
-          <Route path='/profile' element={<Main/>} />
+          <Route path='/profile' element={
+            <ProtectedRoute>
+            <Main/>
+            </ProtectedRoute>
+            } />
           <Route path='/register' element={<RegisterPage/>} />
           <Route path='/profile' element={<Main/>} />
         </Routes>
