@@ -26,7 +26,6 @@ const ForgetPassword = () => {
       });
       
       const data = await res.json()
-      console.log(data);
       
       if(!res.ok){
         alert(`Error sending OTP. Please try again.`);
@@ -47,7 +46,7 @@ const ForgetPassword = () => {
         alert("Error sending OTP. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      console.log("Error:", error.message);
       alert("An error occurred. Please try again.");
     }
   };

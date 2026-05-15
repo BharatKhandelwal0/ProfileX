@@ -52,6 +52,7 @@ const UpdatePassword = () => {
         }
     } catch (error) {
       console.log("Error updating password:", error.message);
+      alert("An error occurred while updating the password. Please try again.");
     }
   };
 

@@ -35,7 +35,6 @@ const LoginPage = () => {
       });
   
       const data = await res.json();
-      console.log(data);
   
       if(res.ok){
         navigate("/profile");
@@ -44,6 +43,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Error during login:", error.message);
+      alert("An error occurred during login. Please try again.");
     }
   };
 
