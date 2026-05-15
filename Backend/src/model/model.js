@@ -40,35 +40,26 @@ const dbSchema = new mongoose.Schema({
         enum:['user','admin'],
         default:'user'
     },
-    refreshTokens:[{
-        token:{
-            type:String,
-            required:true
-        }
-    }],
-    userInfo:[{
-        image:{
-            type:String,
-            trim:true,
-        },
-        bio:{
-            type:String,
-            trim:true
-        },
-        tags:[{
-            type:String,
-            trim:true,
-            capitalize:true,
-
-        }],
-        about:{
-            type:String,
-            trim:true,
-        },
-        skills:{
-            type:String,
-            trim:true,
-        }
+    refreshToken:{
+        type:String,
+        trim:true,
+        default:""
+    },
+    image:{
+        type:String,
+        trim:true,
+    },
+    bio:{
+        type:String,
+        trim:true
+    },
+    about:{
+        type:String,
+        trim:true,
+    },
+    skills:[{
+        type:String,
+        trim:true,
     }]
 })
 const User = mongoose.model("user",dbSchema)

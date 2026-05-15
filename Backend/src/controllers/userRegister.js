@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 
 export const userRegister = async(req,res)=>{
     try{
-        const {firstName,lastName,email,password} = req.body
+        const {firstName,lastName,email,password,image,bio,about,tags,skills} = req.body
         const exists = await User.findOne({email})
         if(exists){
             return res.status(401).json({message:`${email}, This email already exists , please login.`})
@@ -14,7 +14,12 @@ export const userRegister = async(req,res)=>{
             firstName,
             lastName,
             email,
-            password:hashedPassword
+            password:hashedPassword,
+            image,
+            bio,
+            about,
+            tags,
+            skills
         })
 
         res.status(200).json({message:`${firstName} has Registered Successfuly`})

@@ -22,7 +22,6 @@ const OtpVerification = () => {
         body: JSON.stringify({ email: email, otp: otp })
       });
       const data = await res.json()
-      console.log(data);
   
       if(res.ok){
         navigate('/update-password',{
@@ -34,7 +33,7 @@ const OtpVerification = () => {
         alert("Invalid OTP. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      console.log("Error:", error.message);      
       alert("An error occurred. Please try again.");
     }
   };
@@ -49,7 +48,6 @@ const OtpVerification = () => {
     });
     const data = await res.json()
     alert(`OTP :- ${data?.OTP || "Not received"}`)
-    console.log(data);
   }
 
   return (

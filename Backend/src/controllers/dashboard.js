@@ -6,5 +6,5 @@ export const dashboard = async (req,res)=>{
     if(!check){
         return res.status(401).json({message:`user not Found`})
     }
-    res.status(200).json({message:`welcome ${check.firstName} to ${check.role} dashboard`})
+    res.status(200).json({message:`welcome ${check.firstName} to ${check.role} dashboard`,data : check})
 }

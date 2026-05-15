@@ -19,11 +19,8 @@ export const login = async(req,res)=>{
         const refreshToken = jwt.sign({userId:exists._id},process.env.REFRESH_TOKEN,{expiresIn:'7d'})
         console.log(`refreshToken:- ${refreshToken}`);     
 
-        await User.findByIdAndUpdate(
-            exists._id,
-            {$push:{"refreshTokens":{"token":refreshToken}}},
-            {returnDocument:"after"}
-        )
+        exists.refreshToken = refreshToken
+        await exists.save()
 
         await res.cookie("AccessToken", accessToken,{
             httpOnly:true,

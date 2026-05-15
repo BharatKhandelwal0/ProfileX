@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import RegisterPage from "./RegisterPage.jsx";
 import blueClouds from "../../assets/blueClouds.jpeg";
 import Info from "./Info.jsx";
 import stone from "../../assets/volcano.jpeg";
+import { useNavigate } from "react-router-dom";
 
 const RegInfo = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    bio: "",
+    about: "",
+    skills: [],
+    image: null,
+  });
+
+  const getDataFromChild = (data) => {
+    setFormData((prev) => ({
+      ...prev,
+      ...data,
+    }));
+  };
+  
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex items-center justify-center px-4 py-6">
       {/* Background Image */}
@@ -16,19 +35,7 @@ const RegInfo = () => {
 
       {/* Main Glass Container */}
       <div
-        className="
-      relative z-10
-      w-full
-      max-w-6xl
-      lg:flex-row
-      items-center
-      justify-between
-      gap-10
-      rounded-2xl
-      p-2
-      sm:p-8
-      lg:p-6 
-    "
+        className="relative z-10 w-full max-w-6xl lg:flex-row items-center justify-between gap-10 rounded-2xl p-2 sm:p-8 lg:p-6"
         style={{
           background: "rgba(255,255,255,0.07)",
           backdropFilter: "blur(24px)",
@@ -42,16 +49,17 @@ const RegInfo = () => {
         </div>
 
         {/* Register Section */}
-        <div className="w-full flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-12">
+        <div className="w-full flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-10">
           {/* Register Section */}
-          <div className="w-full lg:w-1/2 flex justify-center">
-            <RegisterPage />
+          <div className="w-full lg:w-1/2 flex-1 justify-center">
+            <RegisterPage sendData={getDataFromChild} formData={formData} />
           </div>
 
           {/* Info Section */}
-          <div className="w-full lg:w-1/2 flex justify-center">
-            <Info />
+          <div className="w-full lg:w-1/2 flex-1 justify-center">
+            <Info sendData={getDataFromChild} formData={formData} />
           </div>
+
         </div>
       </div>
     </div>

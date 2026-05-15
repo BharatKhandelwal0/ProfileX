@@ -4,46 +4,46 @@ import { useNavigate } from "react-router-dom";
 import stone from "../../assets/volcano.jpeg";
 import { Eye, EyeOff } from "lucide-react";
 
-const SignupPage = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+const SignupPage = ({ sendData, formData }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    const { name, value, files } = e.target;
+
+    sendData({
+      [name]: files ? files[0] : value,
     });
   };
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    const { firstName, lastName, email, password } = formData;
+      const { firstName, lastName, email, password } = formData;
 
-    if (!firstName || !lastName || !email || !password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    const res = await fetch("http://localhost:1100/user/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ firstName, lastName, email, password }),
-    });
+      if (!firstName || !lastName || !email || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+      const res = await fetch("http://localhost:1100/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName, email, password }),
+      });
 
-    const data = await res.json();
-    console.log(data);
+      const data = await res.json();
 
-    if (res.ok) {
-      navigate("/login");
-    } else {
-      alert("Signup failed!");
+      if (res.ok) {
+        navigate("/login");
+      } else {
+        alert("Signup failed!");
+      }
+    } catch (error) {
+      console.log("Error during signup:", error.message);
+      alert("An error occurred during signup.");
     }
   };
 

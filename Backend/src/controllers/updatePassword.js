@@ -17,16 +17,6 @@ export const updatePassword = async(req,res)=>{
             return res.status(400).json({message:"password Must Be greater than 7"})
         }
 
-        // const isMatch = await bcrypt.compare(newPassword,user.password)
-        // if(!isMatch){
-        //     return res.status(401).json({message:"entered Wrong Old Password"})
-        // }
-
-        // const isSame = await bcrypt.compare(newPassword,user.password)
-        // if(isSame){
-        //     return res.status(400).json({message:"New password must be different from old password"})
-        // }
-
         const hashedPassword = await bcrypt.hash(newPassword , 10)
 
         user.password = hashedPassword

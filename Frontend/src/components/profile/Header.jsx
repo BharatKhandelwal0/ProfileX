@@ -1,4 +1,4 @@
-const Header = () => {
+const Header = (props) => {
   return (
     <div className='flex flex-col cursor-default lg:flex-row gap-8 p-6 md:p-10 border-b border-slate-800'>
 
@@ -14,26 +14,11 @@ const Header = () => {
       {/* Info */}
       <div className='flex-1 text-center lg:text-left'>
         <h1 className='text-3xl md:text-5xl font-bold'>
-          Bharat Khandelwal
+          {props.firstName} {props.lastName}
         </h1>
 
-        <div className='flex flex-wrap justify-center lg:justify-start gap-3 mt-4'>
-          <span className='text-sm px-4 py-2 rounded-full bg-slate-800'>
-            Software Engineer
-          </span>
-
-          <span className='text-sm px-4 py-2 rounded-full bg-slate-800'>
-            Backend Developer
-          </span>
-
-          <span className='text-sm px-4 py-2 rounded-full bg-slate-800'>
-            Frontend Developer
-          </span>
-        </div>
-
         <p className='text-slate-300 mt-5 text-base md:text-lg max-w-2xl'>
-          Passionate full stack developer focused on scalable backend systems,
-          modern frontend experiences, and clean architecture.
+          {props.bio}
         </p>
 
         {/* Buttons */}
