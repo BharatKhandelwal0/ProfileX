@@ -24,11 +24,9 @@ const App = () => {
             <Main/>
             </ProtectedRoute>
             } />
-          <Route path='/register' element={<RegisterPage/>} />
+          <Route path='/register' element={<RegInfo/>} />
           <Route path='/profile' element={<Main/>} />
           <Route path='/update-password' element={<UpdatePassword/>} />
-          <Route path='/info' element={<Info/>} />
-          <Route path='/reginfo' element={<RegInfo/>} />
         </Routes>
       </BrowserRouter>
     </div>

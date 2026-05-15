@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import stone from "../../assets/volcano.jpeg"
-import {Eye, EyeOff} from 'lucide-react'
+import stone from "../../assets/volcano.jpeg";
+import { Eye, EyeOff } from "lucide-react";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +11,7 @@ const SignupPage = () => {
     email: "",
     password: "",
   });
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,11 +19,11 @@ const SignupPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-   const navigate = useNavigate();
-  const handleSubmit = async(e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const {firstName, lastName, email, password} = formData;
+    const { firstName, lastName, email, password } = formData;
 
     if (!firstName || !lastName || !email || !password) {
       alert("Please fill in all fields.");
@@ -49,107 +49,92 @@ const SignupPage = () => {
 
   return (
     <div>
-      <div className="w-full max-w-md bg-white/10 backdrop-blur-md shadow-lg rounded-2xl p-8 " style={{
-            background: "rgba(255,255,255,0.07)",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            boxShadow: "0 8px 48px rgba(0,0,0,0.4)",
-          }}>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* First Name */}
+        <div>
+          <label className="block mb-2 text-sm font-medium">First Name</label>
 
-        <h1 className="text-3xl font-bold text-center mb-6">
-          Signup
-        </h1>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="Enter first name"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+            className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+          />
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Last Name */}
+        <div>
+          <label className="block mb-2 text-sm font-medium">Last Name</label>
 
-          {/* First Name */}
-          <div>
-            <label className="block mb-2 text-sm font-medium">
-              First Name
-            </label>
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Enter last name"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+            className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+          />
+        </div>
 
-            <input
-              type="text"
-              name="firstName"
-              placeholder="Enter first name"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
-            />
-          </div>
+        {/* Email */}
+        <div>
+          <label className="block mb-2 text-sm font-medium">Email</label>
 
-          {/* Last Name */}
-          <div>
-            <label className="block mb-2 text-sm font-medium">
-              Last Name
-            </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+          />
+        </div>
 
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Enter last name"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
-            />
-          </div>
+        {/* Password */}
+        <div className="relative">
+          <label className="block mb-2 text-sm font-medium">Password</label>
 
-          {/* Email */}
-          <div>
-            <label className="block mb-2 text-sm font-medium">
-              Email
-            </label>
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
-            />
-          </div>
-
-          {/* Password */}
-          <div className="relative">
-            <label className="block mb-2 text-sm font-medium">
-              Password
-            </label>
-
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
-            />
-            <button type="button" onClick={()=>{setShowPassword(!showPassword)}} className="absolute p-1 top-6 right-2 translate-y-1/2 cursor-pointer transition duration-300">
-              {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
-            </button>
-          </div>
-
-          {/* Button */}
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Enter your password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="w-full bg-white/10 border border-gray-300 text-lg rounded-lg px-4 py-3 outline-none focus:ring-1 "
+          />
           <button
-            type="submit"
-            className="w-full bg-white text-xl hover:bg-gray-200 cursor-pointer text-black py-3 rounded-lg transition duration-300"
+            type="button"
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+            className="absolute p-1 top-6 right-2 translate-y-1/2 cursor-pointer transition duration-300"
           >
-            Create Account
+            {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
           </button>
-        </form>
+        </div>
 
-        <p className="text-sm text-center text-white mt-6">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 cursor-pointer hover:underline">
-            Login
-          </Link>
-        </p>
-      </div>
+        {/* profile */}
+
+        <div>
+          <label className="block text-base text-white mb-2 font-medium">
+            Profile Image
+          </label>
+
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+            className="w-full bg-white/10 text-xl font-medium text-white border border-white/20 rounded-lg px-2 py-2 file:bg-white file:mr-5 file:text-black file:border-none file:px-4 file:py-2 file:rounded-md file:cursor-pointer"
+          />
+        </div>
+      </form>
     </div>
   );
 };
