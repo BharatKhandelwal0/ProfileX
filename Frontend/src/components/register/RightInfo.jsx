@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import {X} from 'lucide-react'
 
-const ProfileSetup = ({ formData, sendData }) => {
-  const navigate = useNavigate();
+const ProfileSetup = ({ formData, handleChange, addSkill, removeSkill }) => {
   const [input, setInput] = useState("");
-  const [show, setShow] = useState(false)
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      setShow(true)
 
-      const trimmedSkill = input.trim().toLowerCase();
+      const trimmedSkill = input.trim()
 
       if (!trimmedSkill) return;
 
@@ -23,83 +19,33 @@ const ProfileSetup = ({ formData, sendData }) => {
         return;
       }
 
-      // update formData.skills
-      sendData({
-        skills: [...formData.skills, trimmedSkill],
-      });
+      addSkill(trimmedSkill);
 
       // clear input
       setInput("");
     }
   };
 
-  const removeSkills = (skillToRemove) => {
-    const filteredSkills = formData.skills.filter(
-      (skill) => skill !== skillToRemove,
-    );
+//   const removeSkills = (skillToRemove) => {
+//     const filteredSkills = formData.skills.filter(
+//       (skill) => skill !== skillToRemove,
+//     );
 
-    sendData({
-      skills: filteredSkills,
-    });
-  };
+//     sendData({
+//       skills: filteredSkills,
+//     });
+//   };
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
+//   const handleChange = (e) => {
+//     const { name, value, files } = e.target;
 
-    sendData({
-      [name]: files ? files[0] : value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const {
-        firstName,
-        lastName,
-        email,
-        password,
-        bio,
-        about,
-        skills,
-        image,
-      } = formData;
-
-      const res = await fetch("http://localhost:1100/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          password,
-          bio,
-          about,
-          skills,
-          image,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("Registration successful!");
-        navigate("/login");
-      } else {
-        alert("Registration failed: " + data.message);
-      }
-    } catch (error) {
-      console.log("Error during registration:", error.message);
-      alert("An error occurred during registration.");
-    }
-  };
+//     sendData({
+//       [name]: files ? files[0] : value,
+//     });
+//   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="space-y-5">
+    <div className="space-y-5">
         {/* Bio */}
         <div>
           <label className="block text-base text-white mb-2 font-medium">
@@ -151,7 +97,7 @@ const ProfileSetup = ({ formData, sendData }) => {
           />
 
           {/* update skills */}
-          {show === true && (
+          {formData.skills.length > 0 && (
             <div className=" hero w-full max-h-28 overflow-y-auto text-base font-medium flex flex-wrap gap-3  rounded-lg px-3 py-2">
               {formData.skills.map((skill, index) => (
                 <div
@@ -160,11 +106,9 @@ const ProfileSetup = ({ formData, sendData }) => {
               >
                 <span>{skill}</span>
 
-                {skill.length < 1 ? setShow(false) : null}
-
                 <button
                   type="button"
-                  onClick={() => removeSkills(skill)}
+                  onClick={() => removeSkill(skill)}
                   className="text-gray-700 hover:text-gray-900 transition"
                 >
                   <X size={15} />
@@ -181,7 +125,7 @@ const ProfileSetup = ({ formData, sendData }) => {
         >
           Create Account
         </button>
-      </form>
+      {/* </form> */}
       <p className="text-sm text-center text-white mt-6">
         Already have an account?{" "}
         <Link

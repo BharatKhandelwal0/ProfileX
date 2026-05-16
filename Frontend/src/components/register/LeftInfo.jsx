@@ -1,57 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import stone from "../../assets/volcano.jpeg";
 import { Eye, EyeOff } from "lucide-react";
 
-const SignupPage = ({ sendData, formData }) => {
+const LeftInfo = ({ handleChange, formData }) => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-
-    sendData({
-      [name]: files ? files[0] : value,
-    });
-  };
-
-  const navigate = useNavigate();
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-
-      const { firstName, lastName, email, password } = formData;
-
-      if (!firstName || !lastName || !email || !password) {
-        alert("Please fill in all fields.");
-        return;
-      }
-      const res = await fetch("http://localhost:1100/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstName, lastName, email, password }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        navigate("/login");
-      } else {
-        alert("Signup failed!");
-      }
-    } catch (error) {
-      console.log("Error during signup:", error.message);
-      alert("An error occurred during signup.");
-    }
-  };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="space-y-5">
         {/* First Name */}
-        <div>
+        <div className="space-y-5">
           <label className="block mb-2 text-sm font-medium">First Name</label>
 
           <input
@@ -134,9 +91,9 @@ const SignupPage = ({ sendData, formData }) => {
             className="w-full bg-white/10 text-xl font-medium text-white border border-white/20 rounded-lg px-2 py-2 file:bg-white file:mr-5 file:text-black file:border-none file:px-4 file:py-2 file:rounded-md file:cursor-pointer"
           />
         </div>
-      </form>
+      {/* </form> */}
     </div>
   );
 };
 
-export default SignupPage;
+export default LeftInfo;

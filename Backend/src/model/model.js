@@ -5,13 +5,13 @@ const dbSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
-        capitalize:true
+        toUppercase:true
     },
     lastName:{
         type:String,
         required:true,
         trim:true,
-        capitalize:true
+        toUppercase:true
     },
     email:{
         type:String,
@@ -48,18 +48,24 @@ const dbSchema = new mongoose.Schema({
     image:{
         type:String,
         trim:true,
+        required:true
     },
     bio:{
         type:String,
-        trim:true
+        trim:true,
+        required:true
     },
     about:{
         type:String,
         trim:true,
+        required:true
     },
     skills:[{
         type:String,
         trim:true,
+        required:true
+    },{
+        timestamps:true
     }]
 })
 const User = mongoose.model("user",dbSchema)

@@ -2,13 +2,11 @@ import LoginPage from './components/login/LoginPage.jsx'
 import Main from './components/profile/Main.jsx'
 import Home from './components/home/Home.jsx'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import RegisterPage from './components/register/RegisterPage.jsx'
 import ForgetPassword from './components/login/ForgetPassword.jsx'
 import EnterOtp from './components/login/EnterOtp.jsx'
 import ProtectedRoute from './components/verification/ProtectedRoute.jsx'
 import UpdatePassword from './components/login/UpdatePassword.jsx'
-import Info from './components/register/Info.jsx'
-import RegInfo from './components/register/RegInfo.jsx'
+import BasicInfo from './components/register/BasicInfo.jsx'
 
 const App = () => {
   return (
@@ -24,7 +22,7 @@ const App = () => {
             <Main/>
             </ProtectedRoute>
             } />
-          <Route path='/register' element={<RegInfo/>} />
+          <Route path='/register' element={<BasicInfo/>} />
           <Route path='/profile' element={<Main/>} />
           <Route path='/update-password' element={<UpdatePassword/>} />
         </Routes>

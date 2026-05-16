@@ -6,7 +6,7 @@ const Header = (props) => {
       <div className='flex justify-center lg:justify-start'>
         <img
           className='h-40 w-40 md:h-52 md:w-52 object-cover rounded-full border-4 border-purple-500 shadow-lg'
-          src="https://i0.wp.com/picjumbo.com/wp-content/uploads/artistic-high-fashion-portrait-of-a-woman-with-sunglasses-free-image.jpeg?w=600&quality=80"
+          src={props.image}
           alt="profile"
         />
       </div>

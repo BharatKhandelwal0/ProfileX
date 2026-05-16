@@ -1,5 +1,6 @@
 import User from "../model/model.js"
 import bcrypt from 'bcrypt'
+import { uploadOnCloudinary } from '../utils/cloudinary.js'
 
 export const userRegister = async(req,res)=>{
     try{
@@ -10,15 +11,23 @@ export const userRegister = async(req,res)=>{
         }
         const hashedPassword = await bcrypt.hash(password,10)
 
+        const imageLocalPath = req.file?.path
+        if(!imageLocalPath){
+            return res.status(400).json({message: "Image Not Found"})
+        }
+        const profileImage = await uploadOnCloudinary(imageLocalPath)
+        if(!profileImage?.secure_url){
+            return res.status(500).json("Image not Uploaded properly on Cloudinary")
+        }        
+
         await User.create({
             firstName,
             lastName,
             email,
             password:hashedPassword,
-            image,
+            image: profileImage.secure_url,
             bio,
             about,
-            tags,
             skills
         })
 
