@@ -1,16 +1,41 @@
-# React + Vite
+# Frontend - MERN Profile App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This frontend is a React + Vite application for the MERN profile app.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The frontend includes a modern landing page, registration flow, login flow, password recovery, and a protected user profile dashboard.
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Home landing page with hero, about, products, and CTA sections
+- User registration with image upload
+- Login with cookie-based authentication
+- Forgot password and OTP verification flow
+- Protected profile dashboard using authenticated API calls
 
-## Expanding the ESLint configuration
+## Important Files
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `src/main.jsx` — React app entrypoint
+- `src/App.jsx` — application routes and page components
+- `src/components/home/` — landing page UI sections
+- `src/components/login/` — login, forgot password, OTP, and update password pages
+- `src/components/register/` — registration form and skill input components
+- `src/components/profile/` — authenticated dashboard UI
+- `src/components/verification/ProtectedRoute.jsx` — route protection using backend auth check
+
+## Run Locally
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Notes
+
+- Frontend API requests target `http://localhost:1100`.
+- Ensure the backend is running first to use registration, login, and profile pages.
