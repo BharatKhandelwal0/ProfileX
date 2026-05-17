@@ -16,6 +16,7 @@ export const forgetPassword =async (req,res)=>{
             return res.status(500).json({message: "OTP Not generated"})
         }
         user.otp = hashedOtp
+        user.otpExpires = Date.now() + 2 * 60 * 1000
         await user.save()
 
         res.status(200).json({message:"OTP sent to your email", OTP: otp})
@@ -33,10 +34,16 @@ export const verfiyOtp = async (req,res)=>{
             return res.status(400).json({message:"Wrong Email ID"})
         }
         const compareOtp = await bcrypt.compare(otp.toString(),user.otp)
+
+        if(Date.now() > user.otpExpires){
+            return res.status(400).json({message:"OTP Expired!"})
+        }
+
         if(!compareOtp){
             return res.status(400).json({message:"Invalid OTP"})
         }
-        user.otp = ""
+        user.otp = null
+        user.otpExpires = null
         await user.save()
         res.status(200).json({message:"OTP verified successfully"}) 
     }catch(error){

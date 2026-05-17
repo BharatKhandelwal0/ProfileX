@@ -33,7 +33,11 @@ const dbSchema = new mongoose.Schema({
     otp:{
         type:String,
         trim:true,
-        default:""
+        default:null
+    },
+    otpExpires:{
+        type:Date,
+        default:null
     },
     role:{
         type:String,
